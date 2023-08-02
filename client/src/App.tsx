@@ -2,21 +2,13 @@ import { useEffect, useState } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import { ContentEditableEvent, DefaultEditor } from 'react-simple-wysiwyg';
 import Avatar from 'react-avatar';
-
 import './App.css';
 import { LoginSection } from './components/login-section/LoginSection';
+import { isDocumentEvent, isUserEvent } from './utils';
+import { WS_URL } from './configs/app.config';
+import { TWebSocketMessage } from './types';
+import { History } from './components/history/History';
 
-const WS_URL = 'ws://127.0.0.1:4000';
-type TJson = {type: string, data?: {users?: {[key: string]: {username: string, type: string}}, editorContent?: string, userActivity: string[] }}
-function isUserEvent(message: {type: string, data: string}) {
-    const evt = JSON.parse(message.data);
-    return evt.type === 'userevent';
-}
-
-function isDocumentEvent(message: {type: string, data: string}) {
-  const evt = JSON.parse(message.data);
-  return evt.type === 'contentchange';
-}
 
 function App() {
   const [username, setUsername] = useState('');
@@ -50,22 +42,8 @@ function App() {
   );
 }
 
-function History() {
-  console.log('history');
-  const { lastJsonMessage } = useWebSocket<TJson>(WS_URL, {
-    share: true,
-    filter: isUserEvent
-  });
-  const activities = lastJsonMessage?.data?.userActivity || [];
-  return (
-    <ul>
-      {activities.map((activity, index) => <li key={`activity-${index}`}>{activity}</li>)}
-    </ul>
-  );
-}
-
 function Users() {
-  const { lastJsonMessage } = useWebSocket<TJson>(WS_URL, {
+  const { lastJsonMessage } = useWebSocket<TWebSocketMessage>(WS_URL, {
     share: true,
     filter: isUserEvent
   });
@@ -98,7 +76,7 @@ function EditorSection() {
 }
 
 function Document() {
-  const { lastJsonMessage, sendJsonMessage } = useWebSocket<TJson>(WS_URL, {
+  const { lastJsonMessage, sendJsonMessage } = useWebSocket<TWebSocketMessage>(WS_URL, {
     share: true,
     filter: isDocumentEvent
   });
