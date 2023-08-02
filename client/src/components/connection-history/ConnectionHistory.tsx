@@ -1,14 +1,14 @@
 import { type FC, type HTMLProps } from 'react';
-import styles from './History.module.css';
+import styles from './ConnectionHistory.module.css';
 import cn from 'classnames';
 import { useWebSocket } from 'react-use-websocket/dist/lib/use-websocket';
 import { WS_URL } from '../../configs/app.config';
 import { isUserEvent } from '../../utils';
 import { TWebSocketMessage } from '../../types';
 
-type THistoryProps = HTMLProps<HTMLUListElement>;
+type TConnectionHistoryProps = HTMLProps<HTMLUListElement>;
 
-const History: FC<THistoryProps> = ({ className }) => {
+const ConnectionHistory: FC<TConnectionHistoryProps> = ({ className }) => {
   console.log('history');
   const { lastJsonMessage } = useWebSocket<TWebSocketMessage>(WS_URL, {
     share: true,
@@ -24,4 +24,4 @@ const History: FC<THistoryProps> = ({ className }) => {
   );
 };
 
-export { History };
+export { ConnectionHistory };

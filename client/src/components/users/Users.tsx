@@ -15,8 +15,8 @@ const Users: FC<TUsersProps> = () => {
   });
   const users = Object.values(lastJsonMessage?.data?.users || {});
   const [isVisible, setIsVisible] = useState<boolean>(false)
-  return users.map(user => (
-    <div key={user.username}>
+  return users.map((user, index) => (
+    <div key={index}>
       {isVisible && <span>{user.username}</span>}
       <span id={user.username} className="userInfo" key={user.username} onMouseEnter={() => setIsVisible(true)} onMouseLeave={() => setIsVisible(false)}>
         <Avatar name={user.username} size={'40'} round="20px"/>

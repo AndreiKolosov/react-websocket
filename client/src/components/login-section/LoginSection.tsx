@@ -2,13 +2,13 @@ import { useState, type FC, type HTMLProps, type ChangeEvent } from 'react';
 import { useWebSocket } from 'react-use-websocket/dist/lib/use-websocket';
 import styles from './LoginSection.module.css';
 import { WS_URL } from '../../configs/app.config';
+import { useAppStore } from '../../store/appStore';
 
-interface ILoginSectionProps extends HTMLProps<HTMLElement> {
-  onLogin: (v: string) => void;
-}
+type TLoginSectionProps = HTMLProps<HTMLElement> 
 
-const LoginSection: FC<ILoginSectionProps> = ({ onLogin }) => {
+const LoginSection: FC<TLoginSectionProps> = () => {
   const [username, setUsername] = useState('');
+  const setUser = useAppStore(store => store.setUserName)
 
   useWebSocket(WS_URL, {
     share: true,
@@ -19,7 +19,7 @@ const LoginSection: FC<ILoginSectionProps> = ({ onLogin }) => {
     if (!username.trim()) {
       return;
     }
-    onLogin && onLogin(username);
+    setUser(username);
   }
 
   return (

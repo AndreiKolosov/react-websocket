@@ -3,9 +3,9 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
+  color-scheme: dark light;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #211e2c;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -30,6 +30,6 @@ body {
 @media (prefers-color-scheme: light) {
   :root {
     color: #28455f;
-    background-color: #ffffff;
+    background-color: #e9e8e4;
   }
 }

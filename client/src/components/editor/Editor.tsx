@@ -4,11 +4,11 @@ import { useWebSocket } from 'react-use-websocket/dist/lib/use-websocket';
 import { WS_URL } from '../../configs/app.config';
 import { TWebSocketMessage } from '../../types';
 import { ContentEditableEvent, DefaultEditor } from 'react-simple-wysiwyg';
-// import styles from './Document.module.css';
+// import styles from './Editor.module.css';
 
-type TDocumentProps = HTMLProps<HTMLElement>
+type TEditorProps = HTMLProps<HTMLElement>
 
-const Document: FC<TDocumentProps> = () => {
+const Editor: FC<TEditorProps> = () => {
   const { lastJsonMessage, sendJsonMessage } = useWebSocket<TWebSocketMessage>(WS_URL, {
     share: true,
     filter: isDocumentEvent
@@ -30,4 +30,4 @@ const Document: FC<TDocumentProps> = () => {
   );
 };
 
-export { Document };
+export { Editor };
