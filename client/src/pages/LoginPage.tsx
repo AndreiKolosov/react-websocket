@@ -15,7 +15,6 @@ const LoginPage: FC = () => {
   return (
     <>
       <LoginSection />
-      <button onClick={() => navigate('/')}>asd</button>
     </>
   );
 };

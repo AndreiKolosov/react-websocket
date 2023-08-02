@@ -4,6 +4,7 @@ import { useAppStore } from '../store/appStore';
 import { useWebSocket } from 'react-use-websocket/dist/lib/use-websocket';
 import { WS_URL } from '../configs/app.config';
 import { ReadyState } from 'react-use-websocket';
+import { Main } from '../components/main/Main';
 
 export const RootLayout: FC = () => {
   const userName = useAppStore(store => store.userName);
@@ -40,10 +41,10 @@ export const RootLayout: FC = () => {
       <header>
         <p>Header</p>
       </header>
-      <main>
+      <Main>
         <Outlet />
         <ScrollRestoration />
-      </main>
+      </Main>
       <footer><span>&copy; A.Kolosov</span></footer>
     </>
   );

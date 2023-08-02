@@ -1,189 +1,103 @@
-.account {
-  height: 100vh;
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  overflow-y: auto;
-  background: #eee;
-}
-.account.account--photo {
-  background: #6fb9fb;
-}
-.account.account--photo .account__card {
-  background-color: rgba(0, 10, 16, 0.8);
-  color: #fff;
-}
-.account.account--photo .form__form-group-icon, .account.account--photo .form__form-group-button {
-  background: transparent;
-}
-.account.account--photo .form__form-group-icon, .account.account--photo input:not(:last-child) {
-  border-right: none;
-}
-.account.account--photo .form__form-group-button, .account.account--photo input {
-  border-left: none;
-}
-.account.account--photo .form__form-group-button.active {
-  border-color: #eff1f5;
-}
-.account.account--photo .form__form-group-button.active svg {
-  fill: #eee;
-}
-.account.account--photo input {
-  color: #fff;
-}
-.account.account--photo input:focus {
-  border-color: #eff1f5;
-}
-.account.account--photo p {
-  color: #fff;
-}
-.account.account--photo .account__title {
-  color: #fff;
-}
-.account__wrapper {
+.login  {
+  width: 480px;
   margin: auto;
-  padding: 10px;
-}
-.account__card {
-  background-color: #fff;
-  margin: 30px auto auto auto;
-  padding: 50px 60px;
-  width: 500px;
-}
-.account__profile {
-  text-align: center;
-}
-.account__btns {
-  display: flex;
-  width: calc(100% + 10px);
-  margin: -10px 0 -20px -10px;
-}
-.account__btns a {
-  margin: 10px 0 20px 10px;
-  white-space: nowrap;
-}
-.account__btn {
-  width: 100%;
-  margin-right: 0;
-}
-.account__avatar {
-  height: 64px;
-  width: 64px;
-  border-radius: 50%;
-  overflow: hidden;
-}
-.account__name {
-  font-size: 11px;
-  text-transform: uppercase;
-  font-weight: 700;
-  line-height: 15px;
-  margin: 5px 0 5px 0px;
-}
-.account__sub {
-  margin-top: 0;
-  margin-bottom: 10px;
-  color: #656262;
-  font-size: 11px;
-  line-height: 15px;
-}
-.account__forgot-password {
-  position: absolute;
-  font-size: 11px;
-  line-height: 15px;
-  bottom: -18px;
-  right: 0;
-}
-.account__forgot-password a {
-  color: #70bbfd;
-}
-.account__forgot-password a:hover {
-  color: #3ea3fc;
-  text-decoration: none;
+  padding: 30px;
+  background-color: #e2dcdc;
+  border-radius: 30px;
 }
 
-.account__or {
-  text-align: center;
-  margin-top: 35px;
-  margin-bottom: 20px;
-  position: relative;
-}
-.account__or:before, .account__or:after {
-  content: "";
-  height: 1px;
-  width: calc(50% - 90px);
-  background: #ddd;
-  position: absolute;
-  top: 10px;
-}
-.account__or:before {
-  left: 0;
-}
-.account__or:after {
-  right: 0;
-}
-.account__social {
-  text-align: center;
-}
-.account__social-btn {
-  display: inline-block;
-  height: 38px;
-  width: 38px;
-  border-radius: 5px;
-  padding: 9px;
-  margin-right: 10px;
-  transition: all 0.3s;
-  border: none;
-}
-.account__social-btn:last-child {
-  margin-right: 0;
-}
-.account__social-btn svg {
-  fill: #fff;
-  height: 20px;
-  width: 20px;
-}
-.account__social-btn.account__social-btn--facebook {
-  background: #4766a4;
-}
-.account__social-btn.account__social-btn--facebook:hover {
-  background: #385080;
-}
-.account__social-btn.account__social-btn--google {
-  background: #c74d4d;
-}
-.account__social-btn.account__social-btn--google:hover {
-  background: #ab3636;
-}
-.account__head {
-  margin-bottom: 30px;
-  padding-left: 10px;
-  border-left: 4px solid #70bbfd;
-}
-.account__logo {
+.login__title {
+  margin: 0 0 32px;
+  width: 100%;
+  text-align: left;
+  font-size: 32px;
+  font-style: normal;
   font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #1c1e2c;
 }
-.account__logo-accent {
-  color: #70bbfd;
+
+.login__desc {
+  margin: 0 0 32px;
+  width: 100%;
+  text-align: left;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #1c1e2c;
 }
-.account__have-account {
+
+.login__form {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  row-gap: 24px;
+}
+
+.login__input {
+  background-color: #e2dcdc;
+  border: none;
+  border-bottom: 1px solid #211e2c;
+  padding: 15px 15px 5px;
+  outline: none;
+  width: 100%;
+  text-align: left;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: rgb(88, 141, 7);
+  transition: box-shadow 0.15s ease-in, border-color 0.15s ease-in;
+}
+
+.login__input:focus, .login__input:not(:placeholder-shown) {
+	border-color: rgb(163, 243, 44);
+  box-shadow: 0px 5px 10px -6px rgba(163, 243, 44, 0.5), 0px -5px 5px -5px rgba(163, 243, 44, 0.5) inset;
+}
+
+.login__input::placeholder {
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+	color: #5a585f;
+	opacity: 1;
+  transition: transform 0.6s ease-in, opacity 0.3s ease-in 0.3s;
+}
+
+.login__input:focus.login__input::placeholder {
+  transform: translateX(-100%);
+	opacity: 0;
+  transition: transform 0.6s ease-in, opacity 0.3s ease-in;
+}
+
+.account__btn {
+  margin: 0;
+  padding: 15px 20px;
+  border-radius: 24px;
+  border: 1px solid #000;
+  outline: none;
+  background-color: transparent;
   text-align: center;
-  margin-top: 20px;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #000000;
+  transition: border-color 0.15s ease-in, opacity 0.15s ease-in;
+  cursor: pointer;
 }
-.account__have-account a {
-  color: #70bbfd;
-  transition: all 0.3s;
+
+.account__btn:focus, .account__btn:active {
+  border-color: rgb(88, 141, 7);
 }
-.account__have-account a:hover {
-  color: #3ea3fc;
-  text-decoration: none;
-}
-@media screen and (max-width: 520px) {
-  .account__card {
-    padding: 35px 30px;
- }
-}
-@media screen and (max-width: 425px) {
-  .account__btns {
-    flex-wrap: wrap;
- }
+
+.account__btn:disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
