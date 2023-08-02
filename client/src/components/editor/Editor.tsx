@@ -1,5 +1,5 @@
 import { type FC, type HTMLProps } from 'react';
-import { isDocumentEvent } from '../../utils';
+// import { isDocumentEvent } from '../../utils';
 import { useWebSocket } from 'react-use-websocket/dist/lib/use-websocket';
 import { WS_URL } from '../../configs/app.config';
 import { TWebSocketMessage } from '../../types';
@@ -11,14 +11,12 @@ type TEditorProps = HTMLProps<HTMLElement>
 const Editor: FC<TEditorProps> = () => {
   const { lastJsonMessage, sendJsonMessage } = useWebSocket<TWebSocketMessage>(WS_URL, {
     share: true,
-    filter: isDocumentEvent
+    // filter: isDocumentEvent
   });
 
   const html =  lastJsonMessage?.data?.editorContent || '';
 
   function handleHtmlChange(e: ContentEditableEvent) {
-    console.log(e);
-    
     sendJsonMessage({
       type: 'contentchange',
       content: e.target.value
