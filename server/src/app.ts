@@ -1,6 +1,6 @@
 import { RawData, WebSocket, WebSocketServer } from 'ws';
 import http from 'http';
-import { nanoid } from 'nanoid'
+import { v4 as uuid } from 'uuid';
 
 type TJson = {type: string, data?: {users?: {[key: string]: {username: string, type: string}}, editorContent?: string, userActivity: string[] }}
 
@@ -68,7 +68,8 @@ function handleDisconnect(userId: string) {
 // A new client connection request received
 wsServer.on('connection', function(connection) {
   // Generate a unique code for every user
-  const userId = nanoid();
+  const userId = uuid();
+
   console.log('Recieved a new connection');
 
   // Store the new connection and handle messages
