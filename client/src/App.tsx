@@ -1,23 +1,21 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import {
-  Navbar,
-  NavbarBrand,
   UncontrolledTooltip
 } from 'reactstrap';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
-import { DefaultEditor } from 'react-simple-wysiwyg';
+import { ContentEditableEvent, DefaultEditor } from 'react-simple-wysiwyg';
 import Avatar from 'react-avatar';
 
 import './App.css';
 
 const WS_URL = 'ws://127.0.0.1:4000';
-
-function isUserEvent(message) {
-  const evt = JSON.parse(message.data);
-  return evt.type === 'userevent';
+type TJson = {type: string, data?: {users?: {[key: string]: {username: string, type: string}}, editorContent?: string, userActivity: string[] }}
+function isUserEvent(message: {type: string, data: string}) {
+    const evt = JSON.parse(message.data);
+    return evt.type === 'userevent';
 }
 
-function isDocumentEvent(message) {
+function isDocumentEvent(message: {type: string, data: string}) {
   const evt = JSON.parse(message.data);
   return evt.type === 'contentchange';
 }
@@ -45,9 +43,7 @@ function App() {
 
   return (
     <>
-      <Navbar color="light" light>
-        <NavbarBrand href="/">Real-time document editor</NavbarBrand>
-      </Navbar>
+      <h1>Real-time document editor</h1>
       <div className="container-fluid">
         {username ? <EditorSection/>
             : <LoginSection onLogin={setUsername}/> }
@@ -56,7 +52,7 @@ function App() {
   );
 }
 
-function LoginSection({ onLogin }) {
+function LoginSection({onLogin}: { onLogin: (v: string) => void}) {
   const [username, setUsername] = useState('');
   useWebSocket(WS_URL, {
     share: true,
@@ -77,7 +73,7 @@ function LoginSection({ onLogin }) {
             <p className="account__name">Hello, user!</p>
             <p className="account__sub">Join to edit the document</p>
           </div>
-          <input name="username" onInput={(e) => setUsername(e.target.value)} className="form-control" />
+          <input name="username" onInput={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)} className="form-control" />
           <button
             type="button"
             onClick={() => logInUser()}
@@ -90,11 +86,11 @@ function LoginSection({ onLogin }) {
 
 function History() {
   console.log('history');
-  const { lastJsonMessage } = useWebSocket(WS_URL, {
+  const { lastJsonMessage } = useWebSocket<TJson>(WS_URL, {
     share: true,
     filter: isUserEvent
   });
-  const activities = lastJsonMessage?.data.userActivity || [];
+  const activities = lastJsonMessage?.data?.userActivity || [];
   return (
     <ul>
       {activities.map((activity, index) => <li key={`activity-${index}`}>{activity}</li>)}
@@ -103,15 +99,15 @@ function History() {
 }
 
 function Users() {
-  const { lastJsonMessage } = useWebSocket(WS_URL, {
+  const { lastJsonMessage } = useWebSocket<TJson>(WS_URL, {
     share: true,
     filter: isUserEvent
   });
-  const users = Object.values(lastJsonMessage?.data.users || {});
+  const users = Object.values(lastJsonMessage?.data?.users || {});
   return users.map(user => (
     <div key={user.username}>
       <span id={user.username} className="userInfo" key={user.username}>
-        <Avatar name={user.username} size={40} round="20px"/>
+        <Avatar name={user.username} size={'40'} round="20px"/>
       </span>
       <UncontrolledTooltip placement="top" target={user.username}>
         {user.username}
@@ -137,14 +133,16 @@ function EditorSection() {
 }
 
 function Document() {
-  const { lastJsonMessage, sendJsonMessage } = useWebSocket(WS_URL, {
+  const { lastJsonMessage, sendJsonMessage } = useWebSocket<TJson>(WS_URL, {
     share: true,
     filter: isDocumentEvent
   });
 
-  const html = lastJsonMessage?.data.editorContent || '';
+  const html =  lastJsonMessage?.data?.editorContent || '';
 
-  function handleHtmlChange(e) {
+  function handleHtmlChange(e: ContentEditableEvent) {
+    console.log(e);
+    
     sendJsonMessage({
       type: 'contentchange',
       content: e.target.value
