@@ -1,4 +1,3 @@
-import express from 'express';
 import { RawData, WebSocket, WebSocketServer } from 'ws';
 import http from 'http';
 import { nanoid } from 'nanoid'
@@ -7,11 +6,10 @@ type TJson = {type: string, data?: {users?: {[key: string]: {username: string, t
 
 const { PORT = 4000 } = process.env;
 
-const app = express(); 
-const server = http.createServer(app);
+const server = http.createServer();
 const wsServer = new WebSocketServer({ server });
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`)
 }) 
 
