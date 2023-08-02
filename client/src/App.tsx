@@ -1,7 +1,4 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import {
-  UncontrolledTooltip
-} from 'reactstrap';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import { ContentEditableEvent, DefaultEditor } from 'react-simple-wysiwyg';
 import Avatar from 'react-avatar';
@@ -104,14 +101,13 @@ function Users() {
     filter: isUserEvent
   });
   const users = Object.values(lastJsonMessage?.data?.users || {});
+  const [isVisible, setIsVisible] = useState<boolean>(false)
   return users.map(user => (
     <div key={user.username}>
-      <span id={user.username} className="userInfo" key={user.username}>
+      {isVisible && <span>{user.username}</span>}
+      <span id={user.username} className="userInfo" key={user.username} onMouseEnter={() => setIsVisible(true)} onMouseLeave={() => setIsVisible(false)}>
         <Avatar name={user.username} size={'40'} round="20px"/>
       </span>
-      <UncontrolledTooltip placement="top" target={user.username}>
-        {user.username}
-      </UncontrolledTooltip>
     </div>
   ));
 }

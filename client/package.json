@@ -14,8 +14,7 @@
     "react-avatar": "^5.0.3",
     "react-dom": "^18.2.0",
     "react-simple-wysiwyg": "^2.2.5",
-    "react-use-websocket": "^4.3.1",
-    "reactstrap": "^9.2.0"
+    "react-use-websocket": "^4.3.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
