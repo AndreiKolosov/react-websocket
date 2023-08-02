@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
-import './App.css';
 import { LoginSection } from './components/login-section/LoginSection';
 import { WS_URL } from './configs/app.config';
 import { EditorSection } from './components/editor-section/EditorSection';
+import './styles/globals.css';
 
 function App() {
   const [username, setUsername] = useState('');
