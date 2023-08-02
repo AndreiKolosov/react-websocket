@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
-import { ContentEditableEvent, DefaultEditor } from 'react-simple-wysiwyg';
 import Avatar from 'react-avatar';
 import './App.css';
 import { LoginSection } from './components/login-section/LoginSection';
-import { isDocumentEvent, isUserEvent } from './utils';
+import { isUserEvent } from './utils';
 import { WS_URL } from './configs/app.config';
 import { TWebSocketMessage } from './types';
 import { History } from './components/history/History';
-
+import { Document } from './components/document/Document';
 
 function App() {
   const [username, setUsername] = useState('');
@@ -75,27 +74,27 @@ function EditorSection() {
   );
 }
 
-function Document() {
-  const { lastJsonMessage, sendJsonMessage } = useWebSocket<TWebSocketMessage>(WS_URL, {
-    share: true,
-    filter: isDocumentEvent
-  });
+// function Document() {
+//   const { lastJsonMessage, sendJsonMessage } = useWebSocket<TWebSocketMessage>(WS_URL, {
+//     share: true,
+//     filter: isDocumentEvent
+//   });
 
-  const html =  lastJsonMessage?.data?.editorContent || '';
+//   const html =  lastJsonMessage?.data?.editorContent || '';
 
-  function handleHtmlChange(e: ContentEditableEvent) {
-    console.log(e);
+//   function handleHtmlChange(e: ContentEditableEvent) {
+//     console.log(e);
     
-    sendJsonMessage({
-      type: 'contentchange',
-      content: e.target.value
-    });
-  }
+//     sendJsonMessage({
+//       type: 'contentchange',
+//       content: e.target.value
+//     });
+//   }
 
-  return (
-    <DefaultEditor value={html} onChange={handleHtmlChange} />
-  );
-}
+//   return (
+//     <DefaultEditor value={html} onChange={handleHtmlChange} />
+//   );
+// }
 
 export default App;
 
