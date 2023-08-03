@@ -1,4 +1,4 @@
-import { IClientMessage, IResponseMessage, WS_EVENTS } from '../types';
+import { IClientMessage, IResponseMessage, WS_EVENTS } from '../../types';
 import { type RawData, WebSocket } from 'ws';
 import { v4 as uuid } from 'uuid';
 
