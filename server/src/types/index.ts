@@ -11,7 +11,7 @@ export interface IUser {
 
 export interface IClientMessage {
   type: WS_EVENTS;
-  data: {
+  payload: {
     user?: IUser;
     editorContent?: string;
   }
@@ -19,7 +19,7 @@ export interface IClientMessage {
 
 export interface IResponseMessage {
   type: WS_EVENTS;
-  data: {
+  payload: {
     users?: {[key: string]: { username: string; id: string }};
     editorContent?: string;
     usersActivity?: string[]

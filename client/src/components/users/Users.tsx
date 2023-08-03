@@ -34,8 +34,8 @@ const Users: FC<TUsersProps> = ({ className }) => {
   const [users, setUsers] = useState<TUser[]>([]);
 
   useEffect(() => {
-    if (lastJsonMessage?.data?.users) {
-      setUsers(Object.values(lastJsonMessage.data.users));
+    if (lastJsonMessage?.payload.users) {
+      setUsers(Object.values(lastJsonMessage.payload.users));
     }
   }, [lastJsonMessage]);
 

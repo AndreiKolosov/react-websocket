@@ -18,8 +18,8 @@ const ConnectionHistory: FC<TConnectionHistoryProps> = ({ className }) => {
   });
 
   useEffect(() => {
-    if(lastJsonMessage?.data?.usersActivity) {
-      setActivities(lastJsonMessage?.data?.usersActivity)
+    if(lastJsonMessage?.payload.usersActivity) {
+      setActivities(lastJsonMessage?.payload.usersActivity)
     }
   }, [lastJsonMessage])
 

@@ -25,19 +25,19 @@ function broadcastMessage(data: IResponseMessage) {
 function handleMessage(rawMessage: RawData, userId: string) {
   const message: IClientMessage = JSON.parse(rawMessage.toString());
 
-  const response: IResponseMessage = { type: message.type, data: {} };
+  const response: IResponseMessage = { type: message.type, payload: {} };
 
-  if (message.type === WS_EVENTS.USER_EVENT && message.data.user) {
-    const username = message.data.user.username;
+  if (message.type === WS_EVENTS.USER_EVENT && message.payload.user) {
+    const username = message.payload.user.username;
     users[userId] = { id: userId, username };
     usersActivity.push(`${username} → joined the document`);
-    response.data = { users, usersActivity, editorContent };
+    response.payload = { users, usersActivity, editorContent };
   }
 
-  if (message.type === WS_EVENTS.CONTENT_CHANGE && message.data.editorContent) {
-    const content = message.data.editorContent;
+  if (message.type === WS_EVENTS.CONTENT_CHANGE && message.payload.editorContent) {
+    const content = message.payload.editorContent;
     editorContent = content;
-    response.data = { editorContent };
+    response.payload = { editorContent };
   }
 
   broadcastMessage(response);
@@ -46,11 +46,11 @@ function handleMessage(rawMessage: RawData, userId: string) {
 function handleDisconnect(userId: string) {
   console.log(`${userId} disconnected.`);
 
-  const response: IResponseMessage = { type: WS_EVENTS.USER_EVENT, data: {} };
+  const response: IResponseMessage = { type: WS_EVENTS.USER_EVENT, payload: {} };
   const username = users[userId].username || userId;
 
   usersActivity.push(`${username} ← left the document`);
-  response.data = { users, usersActivity };
+  response.payload = { users, usersActivity };
 
   delete clients[userId];
   delete users[userId];

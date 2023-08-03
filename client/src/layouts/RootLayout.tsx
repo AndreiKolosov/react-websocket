@@ -30,7 +30,7 @@ export const RootLayout: FC = () => {
     if (isAuth && readyState === ReadyState.OPEN) {
       
       sendJsonMessage({
-        data: {
+        payload: {
           user: {
             username: userName,
           }

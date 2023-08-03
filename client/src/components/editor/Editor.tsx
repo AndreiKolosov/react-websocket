@@ -16,12 +16,12 @@ const Editor: FC<TEditorProps> = ({ className }) => {
     // filter: isDocumentEvent
   });
 
-  const html =  lastJsonMessage?.data?.editorContent || '';
+  const html =  lastJsonMessage?.payload.editorContent || '';
 
   function handleHtmlChange(e: ContentEditableEvent) {
     sendJsonMessage({
       type: WS_EVENTS.CONTENT_CHANGE,
-      data: {
+      payload: {
         editorContent:  e.target.value
       }
     });
