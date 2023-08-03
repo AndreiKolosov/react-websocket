@@ -3,6 +3,6 @@ export type TWebSocketMessage = {
   data: {
     users?: { [key: string]: { username: string; type: string } };
     editorContent?: string;
-    userActivity: string[];
+    usersActivity: string[];
   };
 }

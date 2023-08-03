@@ -9,6 +9,7 @@ import { Header } from '../components/header/Header';
 import { APP_ROUTS } from '../router/app-routs';
 import { Footer } from '../components/footer/Footer';
 import { useAuth } from '../hooks';
+import { WS_EVENTS } from '../utils/constants';
 
 export const RootLayout: FC = () => {
   const { isAuth } = useAuth();
@@ -27,11 +28,14 @@ export const RootLayout: FC = () => {
 
   useEffect(() => {
     if (isAuth && readyState === ReadyState.OPEN) {
-      console.log(userName);
       
       sendJsonMessage({
-        username: userName,
-        type: 'userevent',
+        data: {
+          user: {
+            username: userName,
+          }
+        },
+        type: WS_EVENTS.USER_EVENT,
       });
     }
   }, [userName, sendJsonMessage, readyState, isAuth]);

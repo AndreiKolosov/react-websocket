@@ -6,6 +6,7 @@ import { TWebSocketMessage } from '../../types';
 import { ContentEditableEvent, DefaultEditor } from 'react-simple-wysiwyg';
 import styles from './Editor.module.css';
 import cn from 'classnames';
+import { WS_EVENTS } from '../../utils/constants';
 
 type TEditorProps = HTMLProps<HTMLElement>
 
@@ -19,8 +20,10 @@ const Editor: FC<TEditorProps> = ({ className }) => {
 
   function handleHtmlChange(e: ContentEditableEvent) {
     sendJsonMessage({
-      type: 'contentchange',
-      content: e.target.value
+      type: WS_EVENTS.CONTENT_CHANGE,
+      data: {
+        editorContent:  e.target.value
+      }
     });
   }
 
