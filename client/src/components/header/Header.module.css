@@ -1,0 +1,21 @@
+.header {
+  padding: 24px 16px;
+  display: grid;
+}
+
+.header__logo {
+  justify-self: center;
+  width: fit-content;
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--primary-color-dark);
+  line-height: 1;
+  text-decoration: none;
+  transition: color 0.3s ease-in;
+}
+
+@media screen and (hover: hover) {
+  .header__logo:hover {
+    color: var(--primary-color-accent-contrast);
+  }
+}

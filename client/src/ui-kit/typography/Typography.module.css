@@ -86,7 +86,7 @@
   text-transform: uppercase;
 }
 
-@media screen and (max-width: 1439px) {
+@media screen and (max-width: 1239px) {
   .typography_h1 {
     font-size: 38px;
   }

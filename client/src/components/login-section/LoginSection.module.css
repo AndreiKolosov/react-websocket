@@ -1,7 +1,8 @@
 .login  {
-  max-width: 480px;
+  max-width: 580px;
   width: 100%;
-  margin: auto;
+  align-self: center;
+  justify-self: center;
   padding: 30px;
   background-color: var(--primary-color-light);
   border-radius: 30px;
