@@ -1,24 +1,36 @@
-import { type FC, type HTMLProps } from 'react';
+import { useState, type FC, type HTMLProps, useEffect } from 'react';
 import styles from './ConnectionHistory.module.css';
 import cn from 'classnames';
 import { useWebSocket } from 'react-use-websocket/dist/lib/use-websocket';
 import { WS_URL } from '../../configs/app.config';
 import { isUserEvent } from '../../utils';
 import { TWebSocketMessage } from '../../types';
+import Typography from '../../ui-kit/typography/Typography';
 
 type TConnectionHistoryProps = HTMLProps<HTMLUListElement>;
 
 const ConnectionHistory: FC<TConnectionHistoryProps> = ({ className }) => {
-  console.log('history');
+  const [activities, setActivities] = useState<string[]>([])
+
   const { lastJsonMessage } = useWebSocket<TWebSocketMessage>(WS_URL, {
     share: true,
     filter: isUserEvent,
   });
-  const activities = lastJsonMessage?.data?.userActivity || [];
+
+  useEffect(() => {
+    if(lastJsonMessage?.data?.userActivity) {
+      setActivities(lastJsonMessage?.data?.userActivity)
+    }
+  }, [lastJsonMessage])
+
   return (
     <ul className={cn(styles.history, className)}>
       {activities.map((activity, index) => (
-        <li key={`activity-${index}`}>{activity}</li>
+        <li key={`activity-${index}`}>
+          <Typography title={activity} as="p" variant="text-l" color="light" fontWeight='medium' className={styles.history__item}>
+            {activity}
+          </Typography>
+        </li>
       ))}
     </ul>
   );

@@ -1,0 +1,25 @@
+.section {
+  width: 100%;
+  display: grid;
+  row-gap: 24px;
+  column-gap: 24px;
+  align-content: start;
+  align-items: start;
+  grid-template-columns: 3fr max-content;
+  grid-template-rows: max-content 1fr;
+  grid-template-areas:
+    'users users'
+    'editor history';
+}
+
+.section__users {
+  grid-area: users;
+}
+
+.section__editor {
+  grid-area: editor;
+}
+
+.section__history {
+  grid-area: history;
+}

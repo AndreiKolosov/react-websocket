@@ -8,8 +8,10 @@ import { Main } from '../ui-kit/main/Main';
 import { Header } from '../components/header/Header';
 import { APP_ROUTS } from '../router/app-routs';
 import { Footer } from '../components/footer/Footer';
+import { useAuth } from '../hooks';
 
 export const RootLayout: FC = () => {
+  const { isAuth } = useAuth();
   const userName = useAppStore(store => store.userName);
   const navigate = useNavigate()
   const { pathname } = useLocation();
@@ -24,7 +26,7 @@ export const RootLayout: FC = () => {
   });
 
   useEffect(() => {
-    if (userName && readyState === ReadyState.OPEN) {
+    if (isAuth && readyState === ReadyState.OPEN) {
       console.log(userName);
       
       sendJsonMessage({
@@ -32,13 +34,13 @@ export const RootLayout: FC = () => {
         type: 'userevent',
       });
     }
-  }, [userName, sendJsonMessage, readyState]);
+  }, [userName, sendJsonMessage, readyState, isAuth]);
 
   useEffect(() => {
-    if (!userName && pathname !== APP_ROUTS.LOGIN) {
+    if ((!isAuth && pathname !== APP_ROUTS.LOGIN) || readyState === ReadyState.CLOSED) {
       navigate(APP_ROUTS.LOGIN, { replace: true })
     }
-  }, [userName, navigate, pathname])
+  }, [isAuth, navigate, pathname, readyState])
 
   return (
     <>
