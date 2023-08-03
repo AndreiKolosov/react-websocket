@@ -1,33 +1,16 @@
 .login  {
-  width: 480px;
+  max-width: 480px;
+  width: 100%;
   margin: auto;
   padding: 30px;
   background-color: var(--primary-color-light);
   border-radius: 30px;
 }
 
-.login__title {
-  margin: 0 0 32px;
-  width: 100%;
-  text-align: left;
-  font-size: 32px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  color: var(--primary-color-dark);
-}
-
-.login__desc {
-  margin: 0 0 32px;
-  width: 100%;
-  text-align: left;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  color: #1c1e2c;
+.login__header {
+  display: grid;
+  row-gap: 24px;
+  margin-bottom: 40px;
 }
 
 .login__form {

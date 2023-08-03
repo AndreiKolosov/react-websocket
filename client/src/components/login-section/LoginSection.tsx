@@ -4,6 +4,7 @@ import styles from './LoginSection.module.css';
 import { WS_URL } from '../../configs/app.config';
 import { useAppStore } from '../../store/appStore';
 import Button from '../../ui-kit/button/Button';
+import Typography from '../../ui-kit/typography/Typography';
 
 type TLoginSectionProps = HTMLProps<HTMLElement>;
 
@@ -28,8 +29,8 @@ const LoginSection: FC<TLoginSectionProps> = () => {
   return (
     <section aria-label="Login" className={styles.login}>
         <header className={styles.login__header}>
-          <h1 className={styles.login__title}>Hello, user!</h1>
-          <p className={styles.login__desc}>Let's get acquainted! <br/> Please enter your name or nickname in the field below.</p>
+          <Typography as='h1' variant='h1' color='dark'>Hello, user!</Typography>
+          <Typography as='p' variant='h2' color='dark' fontWeight='medium'>Let's get acquainted! <br/> Please enter your name or nickname in the field below.</Typography>
         </header>
 
         <form action="submit" onSubmit={(e) => logInUser(e)} className={styles.login__form}>
@@ -37,7 +38,7 @@ const LoginSection: FC<TLoginSectionProps> = () => {
             name="username"
             onInput={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
             className={styles.login__input}
-            placeholder='# Enter your name here'
+            placeholder='# Your name'
           />
 
           <Button variant='fill' color={!username ? 'dark' : 'accent'} fullWidth htmlType="submit" title='Continue' disabled={!username} className={styles.account__btn}>
