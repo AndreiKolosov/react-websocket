@@ -2,7 +2,7 @@
   width: 480px;
   margin: auto;
   padding: 30px;
-  background-color: #e2dcdc;
+  background-color: var(--primary-color-light);
   border-radius: 30px;
 }
 
@@ -15,7 +15,7 @@
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.02em;
-  color: #1c1e2c;
+  color: var(--primary-color-dark);
 }
 
 .login__desc {
@@ -38,9 +38,9 @@
 }
 
 .login__input {
-  background-color: #e2dcdc;
+  background-color: var(--primary-color-light);
   border: none;
-  border-bottom: 1px solid #211e2c;
+  border-bottom: 1px solid var(--primary-color-dark);
   padding: 15px 15px 5px;
   outline: none;
   width: 100%;
@@ -50,13 +50,13 @@
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.02em;
-  color: rgb(88, 141, 7);
+  color: var(--primary-color-accent);
   transition: box-shadow 0.15s ease-in, border-color 0.15s ease-in;
 }
 
 .login__input:focus, .login__input:not(:placeholder-shown) {
-	border-color: rgb(163, 243, 44);
-  box-shadow: 0px 5px 10px -6px rgba(163, 243, 44, 0.5), 0px -5px 5px -5px rgba(163, 243, 44, 0.5) inset;
+  border-color: var(--primary-color-dark);
+  box-shadow: 0px 15px 25px -18px rgba(45, 191, 248, 0.5), 0px -5px 5px -5px rgba(45, 191, 248, 0.5) inset;
 }
 
 .login__input::placeholder {
@@ -64,7 +64,7 @@
 	font-size: inherit;
 	font-weight: inherit;
 	line-height: inherit;
-	color: #5a585f;
+	color: #00000075;
 	opacity: 1;
   transition: transform 0.6s ease-in, opacity 0.3s ease-in 0.3s;
 }
@@ -73,31 +73,4 @@
   transform: translateX(-100%);
 	opacity: 0;
   transition: transform 0.6s ease-in, opacity 0.3s ease-in;
-}
-
-.account__btn {
-  margin: 0;
-  padding: 15px 20px;
-  border-radius: 24px;
-  border: 1px solid #000;
-  outline: none;
-  background-color: transparent;
-  text-align: center;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  color: #000000;
-  transition: border-color 0.15s ease-in, opacity 0.15s ease-in;
-  cursor: pointer;
-}
-
-.account__btn:focus, .account__btn:active {
-  border-color: rgb(88, 141, 7);
-}
-
-.account__btn:disabled {
-  opacity: 0.5;
-  pointer-events: none;
 }

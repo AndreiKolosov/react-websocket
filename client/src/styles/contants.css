@@ -1,0 +1,9 @@
+:root {
+  --primary-color-dark: #0e0d0d;
+  --primary-color-light: #f8f5f5;
+  --primary-color-accent: #2c4a68;
+  --primary-color-accent-contrast: #adaf13;
+  --error-color: #e92323;
+
+  --primary-gradient: linear-gradient(to top, #09203f 0%, #537895 100%);
+}

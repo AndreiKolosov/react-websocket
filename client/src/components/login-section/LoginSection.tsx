@@ -3,6 +3,7 @@ import { useWebSocket } from 'react-use-websocket/dist/lib/use-websocket';
 import styles from './LoginSection.module.css';
 import { WS_URL } from '../../configs/app.config';
 import { useAppStore } from '../../store/appStore';
+import Button from '../../ui-kit/button/Button';
 
 type TLoginSectionProps = HTMLProps<HTMLElement>;
 
@@ -27,8 +28,8 @@ const LoginSection: FC<TLoginSectionProps> = () => {
   return (
     <section aria-label="Login" className={styles.login}>
         <header className={styles.login__header}>
-          <h1 className={styles.login__title}>Привет, пользователь!</h1>
-          <p className={styles.login__desc}>Давай знакомиться! <br/> Пожалуйста, введи свое имя или&nbsp;ник в поле ниже.</p>
+          <h1 className={styles.login__title}>Hello, user!</h1>
+          <p className={styles.login__desc}>Let's get acquainted! <br/> Please enter your name or nickname in the field below.</p>
         </header>
 
         <form action="submit" onSubmit={(e) => logInUser(e)} className={styles.login__form}>
@@ -36,11 +37,13 @@ const LoginSection: FC<TLoginSectionProps> = () => {
             name="username"
             onInput={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
             className={styles.login__input}
-            placeholder='Пользователь #1'
+            placeholder='# Enter your name here'
           />
-          <button type="submit" disabled={!username} className={styles.account__btn}>
-            Войти в приложение
-          </button>
+
+          <Button variant='fill' color={!username ? 'dark' : 'accent'} fullWidth htmlType="submit" title='Continue' disabled={!username} className={styles.account__btn}>
+            Continue
+          </Button>
+
         </form>
     </section>
   );
