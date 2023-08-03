@@ -6,6 +6,7 @@ import { isUserEvent } from '../../utils';
 import Avatar from 'react-avatar';
 import Typography from '../../ui-kit/typography/Typography';
 import styles from './Users.module.css';
+import cn from 'classnames';
 
 type TUsersProps = HTMLProps<HTMLElement>;
 
@@ -25,7 +26,7 @@ const UserPreview = ({ userData }: { userData: TUser }) => {
   );
 };
 
-const Users: FC<TUsersProps> = () => {
+const Users: FC<TUsersProps> = ({ className }) => {
   const { lastJsonMessage } = useWebSocket<TWebSocketMessage>(WS_URL, {
     share: true,
     filter: isUserEvent,
@@ -39,7 +40,7 @@ const Users: FC<TUsersProps> = () => {
   }, [lastJsonMessage]);
 
   return (
-    <ul>
+    <ul className={cn(styles.users, className)}>
       {users.map((user) => (
         <li key={user.username}>
           <UserPreview userData={user} />
