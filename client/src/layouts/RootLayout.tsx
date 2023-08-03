@@ -7,6 +7,7 @@ import { ReadyState } from 'react-use-websocket';
 import { Main } from '../ui-kit/main/Main';
 import { Header } from '../components/header/Header';
 import { APP_ROUTS } from '../router/app-routs';
+import { Footer } from '../components/footer/Footer';
 
 export const RootLayout: FC = () => {
   const userName = useAppStore(store => store.userName);
@@ -46,7 +47,7 @@ export const RootLayout: FC = () => {
         <Outlet />
         <ScrollRestoration />
       </Main>
-      <footer><span>&copy; A.Kolosov</span></footer>
+      <Footer />
     </>
   );
 };
