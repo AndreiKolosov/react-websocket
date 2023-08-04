@@ -52,9 +52,9 @@ function handleMessage(rawMessage: RawData, userId: string) {
 
 function handleDisconnect(userId: string) {
   console.log(`${userId} disconnected.`);
-
+  
   const response: IResponseMessage = { type: WS_EVENTS.USER_EVENT, payload: {} };
-  const username = users[userId].username || userId;
+  const username = users[userId]?.username ?? users[userId]?.id;
 
   usersActivity.push(`${username} ← left the document`);
   response.payload = { users, usersActivity };
