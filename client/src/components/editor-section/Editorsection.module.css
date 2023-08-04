@@ -6,10 +6,11 @@
   align-content: start;
   align-items: start;
   grid-template-columns: 3fr max-content;
-  grid-template-rows: max-content 1fr;
+  grid-template-rows: max-content max-content 1fr;
   grid-template-areas:
     'users users'
-    'editor history';
+    'editor history'
+    'editor chat';
 }
 
 .section__users {
@@ -22,4 +23,8 @@
 
 .section__history {
   grid-area: history;
+}
+
+.section__chat {
+  grid-area: chat;
 }

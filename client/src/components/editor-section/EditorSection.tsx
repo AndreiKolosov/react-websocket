@@ -3,6 +3,7 @@ import { Users } from '../users/Users';
 import { Editor } from '../editor/Editor';
 import { ConnectionHistory } from '../connection-history/ConnectionHistory';
 import styles from './EditorSection.module.css';
+import { Chat } from '../chat/Chat';
 
 type TEditorSectionProps = HTMLProps<HTMLElement>;
 
@@ -12,6 +13,7 @@ const EditorSection: FC<TEditorSectionProps> = () => {
       <Users className={styles.section__users} />
       <Editor className={styles.section__editor} />
       <ConnectionHistory className={styles.section__history} />
+      <Chat className={styles.section__chat} />
     </section>
   );
 };

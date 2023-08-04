@@ -17,7 +17,7 @@ const Editor: FC<TEditorProps> = ({ className }) => {
     // filter: isDocumentEvent
   });
 
-  function handleHtmlChange(e: ContentEditableEvent) {
+  const handleHtmlChange = (e: ContentEditableEvent) => {
     sendJsonMessage({
       type: WS_EVENTS.CONTENT_CHANGE,
       payload: {
