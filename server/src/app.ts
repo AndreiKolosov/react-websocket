@@ -22,7 +22,10 @@ app.get('/api/hello', ( req: Request, res: Response) => {
 }); 
 
 app.listen(API_PORT, () => {
-  console.log(`App listening on port ${API_PORT}`);
+  console.log(`
+    App listening on port ${API_PORT}
+    WS port → ${WS_PORT}
+  `);
 });
 
 // A new client connection request received

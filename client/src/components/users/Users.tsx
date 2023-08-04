@@ -10,7 +10,7 @@ import cn from 'classnames';
 
 type TUsersProps = HTMLProps<HTMLElement>;
 
-type TUser = { username: string; type: string };
+type TUser = { username: string; id: string };
 
 const UserPreview = ({ userData }: { userData: TUser }) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -42,7 +42,7 @@ const Users: FC<TUsersProps> = ({ className }) => {
   return (
     <ul className={cn(styles.users, className)}>
       {users.map((user) => (
-        <li key={user.username}>
+        <li key={user.id}>
           <UserPreview userData={user} />
         </li>
       ))}

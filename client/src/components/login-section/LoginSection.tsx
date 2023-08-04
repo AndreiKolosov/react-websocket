@@ -42,7 +42,7 @@ const LoginSection: FC<TLoginSectionProps> = () => {
           />
 
           <Button variant='fill' color={!username ? 'dark' : 'accent'} fullWidth htmlType="submit" title='Continue' disabled={!username} className={styles.account__btn}>
-            Continue
+            Get started
           </Button>
 
         </form>
