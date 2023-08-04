@@ -3,18 +3,21 @@ import styles from './Chat.module.css';
 import cn from 'classnames';
 import Typography from '../../ui-kit/typography/Typography';
 import { useWebSocket } from 'react-use-websocket/dist/lib/use-websocket';
-import { TWebSocketMessage } from '../../types';
+import { TChatMessage, TWebSocketMessage } from '../../types';
 import { WS_URL } from '../../configs/app.config';
 import { WS_EVENTS } from '../../utils/constants';
+import { useAppStore } from '../../store/appStore';
+import { isUserEvent } from '../../utils';
 
 type TChatProps = HTMLProps<HTMLUListElement>;
 
 const Chat: FC<TChatProps> = ({ className }) => {
+  const username = useAppStore(store => store.userName);
   const [message, setMessage] = useState<string>('');
-  const [chatData, setChatData] = useState<[{from: string; message: string}] | null>(null)
+  const [chatData, setChatData] = useState<TChatMessage[]>([])
   const { lastJsonMessage, sendJsonMessage } = useWebSocket<TWebSocketMessage>(WS_URL, {
     share: true,
-    // filter: isDocumentEvent
+    filter: isUserEvent
   });
 
   const handleSendMessage = (e: FormEvent) => {
@@ -22,15 +25,17 @@ const Chat: FC<TChatProps> = ({ className }) => {
     sendJsonMessage({
       type: WS_EVENTS.USER_EVENT,
       payload: {
-        chatMessage: message,
+        chatMessage: {from: username, message},
       },
     });
     setMessage('')
   }
 
   useEffect(() => {
-    if (lastJsonMessage?.payload.chat) {
-      setChatData(lastJsonMessage.payload.chat);
+    
+    if (lastJsonMessage?.payload.chatData) {
+      console.log(lastJsonMessage);
+      setChatData(lastJsonMessage.payload.chatData);
     }
   }, [lastJsonMessage]);
 

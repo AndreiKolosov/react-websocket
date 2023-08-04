@@ -1,4 +1,4 @@
-import { IClientMessage, IResponseMessage, WS_EVENTS } from '../../types';
+import { IChatMessage, IClientMessage, IResponseMessage, WS_EVENTS } from '../../types';
 import { type RawData, WebSocket } from 'ws';
 import { v4 as uuid } from 'uuid';
 
@@ -6,10 +6,12 @@ import { v4 as uuid } from 'uuid';
 const clients: { [key: string]: WebSocket } = {};
 // I'm maintaining all active users in this object
 const users: { [key: string]: { username: string; id: string } } = {};
+// User activity history.
+const usersActivity: string[] = [];
+// Chat
+const chatData: IChatMessage[] = []
 // The current editor content is maintained here.
 let editorContent: string = '';
-// User activity history.
-let usersActivity: string[] = [];
 
 function broadcastMessage(data: IResponseMessage) {
   // We are sending the current data to all connected clients
@@ -31,7 +33,12 @@ function handleMessage(rawMessage: RawData, userId: string) {
     const username = message.payload.user.username;
     users[userId] = { id: userId, username };
     usersActivity.push(`${username} → joined the document`);
-    response.payload = { users, usersActivity, editorContent };
+    response.payload = { users, usersActivity, editorContent, chatData };
+  }
+
+  if (message.type === WS_EVENTS.USER_EVENT && message.payload.chatMessage) {
+    chatData.push(message.payload.chatMessage)
+    response.payload = { chatData }
   }
 
   if (message.type === WS_EVENTS.CONTENT_CHANGE && message.payload.editorContent) {
@@ -39,7 +46,7 @@ function handleMessage(rawMessage: RawData, userId: string) {
     editorContent = content;
     response.payload = { editorContent };
   }
-
+  
   broadcastMessage(response);
 }
 
