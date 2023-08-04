@@ -33,7 +33,15 @@
   border-radius: 20px;
 }
 
+.chat__listItem {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: left;
+  column-gap: 8px;
+}
+
 .chat__message {
+  align-self: center;
   width: max-content;
   max-width: 288px;
   padding: 3px;
