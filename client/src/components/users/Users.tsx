@@ -27,7 +27,7 @@ const UserPreview = ({ userData }: { userData: TUser }) => {
 };
 
 const Users: FC<TUsersProps> = ({ className }) => {
-  const { lastJsonMessage } = useWebSocket<TWebSocketMessage>(WS_URL, {
+  const { lastJsonMessage,  } = useWebSocket<TWebSocketMessage>(WS_URL, {
     share: true,
     filter: isUserEvent,
   });

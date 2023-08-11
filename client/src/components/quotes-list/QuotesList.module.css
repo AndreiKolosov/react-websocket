@@ -1,0 +1,12 @@
+.list {
+  list-style: none;
+  display: grid;
+  row-gap: 20px;
+}
+
+.list__quote {
+  display: grid;
+  background-color: rgb(83, 80, 80);
+  padding: 15px;
+  border-radius: 20px;
+}

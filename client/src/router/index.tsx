@@ -4,6 +4,7 @@ import { RootLayout } from '../layouts/RootLayout';
 import { NotFoundPage } from '../pages/404';
 import { MainPage } from '../pages/MainPage';
 import { LoginPage } from '../pages/LoginPage';
+import { QuotesPage } from '../pages/QuotesPage';
 
 const rootRouter = createBrowserRouter(
   [
@@ -20,7 +21,10 @@ const rootRouter = createBrowserRouter(
           path: APP_ROUTS.LOGIN,
           element: <LoginPage />,
         },
-        
+        {
+          path: APP_ROUTS.QUOTES,
+          element: <QuotesPage />,
+        },
       ],
     },
   ],

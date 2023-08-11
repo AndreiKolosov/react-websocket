@@ -1,9 +1,12 @@
 .header {
   padding: 24px 16px;
   display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr 2fr 1fr;
 }
 
 .header__logo {
+  grid-column: 2 / 3;
   justify-self: center;
   width: fit-content;
   font-weight: 700;
@@ -14,8 +17,19 @@
   transition: color 0.3s ease-in;
 }
 
+.header__link {
+  justify-self: left;
+  width: fit-content;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--primary-color-dark);
+  line-height: 1;
+  text-decoration: none;
+  transition: color 0.3s ease-in;
+}
+
 @media screen and (hover: hover) {
-  .header__logo:hover {
+  .header__logo:hover, .header__link:hover {
     color: var(--primary-color-accent-contrast);
   }
 }

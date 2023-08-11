@@ -36,7 +36,6 @@ const Chat: FC<TChatProps> = ({ className }) => {
 
   useEffect(() => {
     if (lastJsonMessage?.payload.chatData) {
-      console.log(lastJsonMessage);
       setChatData(lastJsonMessage.payload.chatData);
     }
   }, [lastJsonMessage]);

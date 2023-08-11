@@ -3,6 +3,7 @@ import { onConnection } from './routes/websocket';
 import express from 'express';
 import cors from 'cors';
 import { Request, Response } from 'express';
+import { quotes } from './data/quotes';
 const { API_PORT = 4000, WS_PORT = 5000 } = process.env;
 
 const app = express(); 
@@ -17,8 +18,8 @@ app.use(
   }),
 );
 
-app.get('/api/hello', ( req: Request, res: Response) => {
-  res.send({ hello: 'Hello from Express! ✌' });
+app.get('/api/quotes', ( req: Request, res: Response) => {
+  res.send(quotes);
 }); 
 
 app.listen(API_PORT, () => {
