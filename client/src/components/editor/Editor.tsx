@@ -1,5 +1,4 @@
-import { type FC, type HTMLProps, useState, useEffect } from 'react';
-// import { isDocumentEvent } from '../../utils';
+import { type FC, type HTMLProps, useEffect } from 'react';
 import { useWebSocket } from 'react-use-websocket/dist/lib/use-websocket';
 import { WS_URL } from '../../configs/app.config';
 import { TWebSocketMessage } from '../../types';
@@ -7,14 +6,15 @@ import { ContentEditableEvent, DefaultEditor } from 'react-simple-wysiwyg';
 import styles from './Editor.module.css';
 import cn from 'classnames';
 import { WS_EVENTS } from '../../utils/constants';
+import { useAppStore } from '../../store/appStore';
 
 type TEditorProps = HTMLProps<HTMLElement>;
 
 const Editor: FC<TEditorProps> = ({ className }) => {
-  const [content, setContent] = useState<string>('');
+  const content = useAppStore((store) => store.editorContent);
+  const setContent = useAppStore((store) => store.setEditorContent);
   const { lastJsonMessage, sendJsonMessage } = useWebSocket<TWebSocketMessage>(WS_URL, {
     share: true,
-    // filter: isDocumentEvent
   });
 
   const handleHtmlChange = (e: ContentEditableEvent) => {
@@ -30,6 +30,7 @@ const Editor: FC<TEditorProps> = ({ className }) => {
     if (lastJsonMessage?.payload.editorContent) {
       setContent(lastJsonMessage.payload.editorContent);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lastJsonMessage]);
 
   return (

@@ -11,11 +11,13 @@ interface IAppStore {
   activeUsers: IUser[];
   chatHistory:TChatMessage[];
   activityHistory: string[];
-  
+  editorContent: string;
+
   setUserName: (v: string) => void;
   setActiveUsers: (v: IUser[]) => void;
   setChatHistory: (v: TChatMessage[]) => void;
   setActivityHistory: (v: string[]) => void;
+  setEditorContent: (v: string) => void;
 }
 
 const useAppStore = create<IAppStore>((set) => ({
@@ -23,6 +25,8 @@ const useAppStore = create<IAppStore>((set) => ({
   activeUsers: [],
   chatHistory: [],
   activityHistory: [],
+  editorContent: '',
+
   setUserName: (userName) => {
     set((store) => ({
       ...store,
@@ -48,6 +52,13 @@ const useAppStore = create<IAppStore>((set) => ({
     set((store) => ({
       ...store,
       activityHistory,
+    }));
+  },
+
+  setEditorContent: (editorContent) => {
+    set((store) => ({
+      ...store,
+      editorContent,
     }));
   },
 }));
