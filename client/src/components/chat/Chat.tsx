@@ -3,7 +3,7 @@ import styles from './Chat.module.css';
 import cn from 'classnames';
 import Typography from '../../ui-kit/typography/Typography';
 import { useWebSocket } from 'react-use-websocket/dist/lib/use-websocket';
-import { TChatMessage, TWebSocketMessage } from '../../types';
+import { TWebSocketMessage } from '../../types';
 import { WS_URL } from '../../configs/app.config';
 import { WS_EVENTS } from '../../utils/constants';
 import { useAppStore } from '../../store/appStore';
@@ -14,8 +14,9 @@ type TChatProps = HTMLProps<HTMLUListElement>;
 
 const Chat: FC<TChatProps> = ({ className }) => {
   const username = useAppStore((store) => store.userName);
+  const chatHistory = useAppStore((store) => store.chatHistory);
+  const setChatHistory = useAppStore((store) => store.setChatHistory);
   const [message, setMessage] = useState<string>('');
-  const [chatData, setChatData] = useState<TChatMessage[]>([]);
   const listRef = useRef<HTMLUListElement>(null)
   const [prevScrollHeight, setPrevScrollHeight] = useState<number>(0);
   const { lastJsonMessage, sendJsonMessage } = useWebSocket<TWebSocketMessage>(WS_URL, {
@@ -36,8 +37,9 @@ const Chat: FC<TChatProps> = ({ className }) => {
 
   useEffect(() => {
     if (lastJsonMessage?.payload.chatData) {
-      setChatData(lastJsonMessage.payload.chatData);
+      setChatHistory(lastJsonMessage.payload.chatData);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lastJsonMessage]);
 
   useEffect(() => {
@@ -48,7 +50,7 @@ const Chat: FC<TChatProps> = ({ className }) => {
       setPrevScrollHeight(height)
       
     }
-  }, [listRef, chatData, prevScrollHeight])
+  }, [listRef, chatHistory, prevScrollHeight])
 
   return (
     <div className={cn(styles.chat, className)}>
@@ -56,8 +58,8 @@ const Chat: FC<TChatProps> = ({ className }) => {
         Chat
       </Typography>
       <ul ref={listRef} className={cn(styles.chat__list, className)}>
-        {chatData &&
-          chatData.map((item, index) => (
+        {chatHistory &&
+          chatHistory.map((item, index) => (
             <li className={styles.chat__listItem} key={index}>
               <Avatar name={item.from} size={'30'} round="20px" />
               <Typography

@@ -7,6 +7,7 @@ import Avatar from 'react-avatar';
 import Typography from '../../ui-kit/typography/Typography';
 import styles from './Users.module.css';
 import cn from 'classnames';
+import { useAppStore } from '../../store/appStore';
 
 type TUsersProps = HTMLProps<HTMLElement>;
 
@@ -27,21 +28,23 @@ const UserPreview = ({ userData }: { userData: TUser }) => {
 };
 
 const Users: FC<TUsersProps> = ({ className }) => {
-  const { lastJsonMessage,  } = useWebSocket<TWebSocketMessage>(WS_URL, {
+  const { lastJsonMessage } = useWebSocket<TWebSocketMessage>(WS_URL, {
     share: true,
     filter: isUserEvent,
   });
-  const [users, setUsers] = useState<TUser[]>([]);
+  const activeUsers = useAppStore(store => store.activeUsers);
+  const setActiveUsers = useAppStore(store => store.setActiveUsers);
 
   useEffect(() => {
     if (lastJsonMessage?.payload.users) {
-      setUsers(Object.values(lastJsonMessage.payload.users));
+      setActiveUsers(Object.values(lastJsonMessage.payload.users));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lastJsonMessage]);
 
   return (
     <ul className={cn(styles.users, className)}>
-      {users.map((user) => (
+      {activeUsers.map((user) => (
         <li key={user.id}>
           <UserPreview userData={user} />
         </li>

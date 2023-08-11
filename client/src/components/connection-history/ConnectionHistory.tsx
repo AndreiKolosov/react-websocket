@@ -6,11 +6,14 @@ import { WS_URL } from '../../configs/app.config';
 import { isUserEvent } from '../../utils';
 import { TWebSocketMessage } from '../../types';
 import Typography from '../../ui-kit/typography/Typography';
+import { useAppStore } from '../../store/appStore';
 
 type TConnectionHistoryProps = HTMLProps<HTMLUListElement>;
 
 const ConnectionHistory: FC<TConnectionHistoryProps> = ({ className }) => {
-  const [activities, setActivities] = useState<string[]>([])
+  const activities = useAppStore(store => store.activityHistory);
+  const setActivities = useAppStore(store => store.setActivityHistory);
+
   const [prevScrollHeight, setPrevScrollHeight] = useState<number>(0);
   const listRef = useRef<HTMLUListElement>(null);
   const { lastJsonMessage } = useWebSocket<TWebSocketMessage>(WS_URL, {
@@ -22,6 +25,7 @@ const ConnectionHistory: FC<TConnectionHistoryProps> = ({ className }) => {
     if(lastJsonMessage?.payload.usersActivity) {
       setActivities(lastJsonMessage?.payload.usersActivity)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lastJsonMessage])
 
   useEffect(() => {
