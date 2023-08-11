@@ -10,7 +10,7 @@
 ---
 
 ## <a id="description" />Описание и особенности
-  Вебсокет демо. Серверная часть - Node.js, Express, TypeScript. Клиент - React.js + TypeScript
+  Вебсокет демо. Онлайн-редактор текста, чат. Серверная часть - Node.js, Express, TypeScript. Клиент - React.js + TypeScript
   Базовый функционал был взят из этого [→ туториала ←](https://blog.logrocket.com/websocket-tutorial-real-time-node-react/). Произведен рефакторинг, доработка и расширение функционала.
 
   Подробнее в readme файлах отдельной части проекта.

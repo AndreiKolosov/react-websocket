@@ -1,27 +1,45 @@
-# React + TypeScript + Vite
+# <a id="top" />Клиент
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Оглавление
 
-Currently, two official plugins are available:
+- [Описание](#description)
+- [Ссылки](#references)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## <a id="description" />Описание и особенности
+  Вебсокет демо. Клиентская часть - React.js, TypeScript. 
+  Базовый функционал был взят из этого [→ туториала ←](https://blog.logrocket.com/websocket-tutorial-real-time-node-react/). Произведен рефакторинг, доработка и расширение функционала.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+  - Добавлен Typescript.
+  - Добавлен стэйт-менеджер Zustand
+  - Базовый роутинг
+  - Чат
+  - Страница цитат (ссылка в шапке)
 
-- Configure the top-level `parserOptions` property like this:
+   Для работы с вебсокетом используется библиотека react-use-websocket. Все, то же самое, можно реализовать без библиотеки, с использованием браузерного api. 
+   
+   Сокетное соединение устанавливается в корневом лэйауте приложения. Для входа необходимо ввести имя пользователя. Далее произойдет переход на страницу с редактором и чатом. Клиент получит историю соединенй, историю чата, активных пользователей и контент редактора.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+   Для проверки функционала API добавлена страница с цитатами, получаемыми с сервера.
+ 
+   Стэйт-менеджер необходим для сохранения состояния приложения при переходах между страницами.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Технологии
+- React js
+- Typescript
+- react-use-websocket (websocket client hook)
+- Zustand (state manager)
+- react-avatar
+- react-simple-wysiwyg (editor)
+
+[Наверх](#top)
+
+---
+
+## <a id="references" />Ссылки
+
+### [- Главный Readme](../README.md)
+
+
+[Наверх](#top)
